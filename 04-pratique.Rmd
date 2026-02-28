@@ -1,0 +1,126 @@
+# IV. Pratique {-}
+
+## 1. Tests d'hypothèses de l'ANOVA {-}
+
+### a. Indépendance des sujets {-}
+
+L’hypothèse d’indépendance des observations stipule que les mesures d’un sujet ne doivent pas influencer celles d’un autre. Dans notre expérience :
+
+Chaque plante a été sélectionnée indépendamment des autres. Les mesures répétées concernent la même plante, mais les plantes entre elles sont distinctes.
+
+Ainsi, on considère que l’hypothèse d’indépendance est respectée.
+
+### b. Normalité des résidus{-}
+
+ Concernant l'analyse de la variance, la validité des tests $F$ repose sur l'hypothèse de normalité des résidus. Toutefois, conformément au Théorème Central Limite (TCL), la distribution des moyennes d'échantillons tend vers la normalité dès lors que l'effectif est suffisamment important (typiquement $n > 30$).Dans le cadre de cette étude, notre effectif total dépasse ce seuil critique. En vertu de la robustesse de l'ANOVA face aux déviations modérées de la normalité pour de tels échantillons, nous considérons cette condition comme satisfaite. Cette approche permet de garantir la fiabilité des conclusions statistiques sans nécessiter de transformations de variables, préservant ainsi l'interprétabilité directe des mesures de hauteur.
+
+### c. Homogénéité des variances et sphéricité {-}
+
+Nos deux facteurs variété de la plante et type de terreau sont unique à une plante, donc il s'agit de facteurs inter-sujet. Ainsi le test qui sera utilisé sur les deux facteurs est celui de l'homogéneité des variances.
+
+* **Facteur Variété**
+
+```{r}
+leveneTest(Hauteur ~ variété, data = data)
+```
+Le test de Levene pour le facteur variété donne une p-value de 0,1722, supérieure au seuil classique de 0,05. Cela indique que les variances entre les groupes ne sont pas significativement différentes, donc l’hypothèse d’homogénéité des variances est respectée pour ce facteur.
+
+* **Facteur terreau**
+
+```{r}
+leveneTest(Hauteur ~ Terreau, data = data)
+```
+Là aussi, l'hypothèse d'homogénité des variances est respectée.
+
+De manière générale, les hypothèses de l'ANOVA à mesure répétée sont respectées pour notre jeu de données. Passons à présent à L'ANOVA-MR en elle même. 
+
+## 2. ANOVA à un facteur {-}
+
+### Facteur terreau {-}
+
+```{r}
+anova_terreau <- aov(
+  Hauteur ~ Terreau + Error(Sujet/Répétition),
+  data = data
+)
+summary(anova_terreau)
+```
+
+L’analyse montre que :
+
+* **Effet inter-sujet** (entre les plantes) : F = 0,224, p = 0,831, ainsi, pas de différence significative entre les plantes selon le type de terreau.
+
+* **Effet intra-sujet** (répétitions sur chaque plante) : F = 5,705, p = 0,00379, donc il y'a un effet significatif du type de terreau sur la hauteur des plantes à travers les répétitions.
+
+**Conclusion** : le type de terreau influence la croissance des plantes lorsqu’on considère les mesures répétées sur chaque plante, mais il n’explique pas de différences globales entre les plantes individuellement.
+
+
+### Variable variété {-}
+
+```{r}
+anova_terreau <- aov(
+  Hauteur ~ variété + Error(Sujet/Répétition),
+  data = data
+)
+summary(anova_terreau)
+```
+L’analyse montre que :
+
+* **Effet inter-sujet** (entre les plantes) : F = 0,034, p = 0,87, donc pas de différence significative entre les plantes selon la variété.
+
+* **Effet intra-sujet** (répétitions sur chaque plante) : F = 20,08, p < 0,001, donc il y'a un effet significatif de la variété sur la hauteur des plantes à travers les répétitions.
+
+**Conclusion** : la variété influence la croissance des plantes lorsque l’on considère les mesures répétées sur chaque plante, mais elle n’explique pas de différences globales entre les plantes individuellement.
+
+## 3. ANOVA à deux facteurs sans interaction {-}
+
+```{r}
+anova_2facteurs <- aov(
+  Hauteur ~ Terreau + variété + Error(Sujet/Répétition),
+  data = data
+)
+summary(anova_2facteurs)
+```
+
+L’analyse montre que :
+
+* **Effet inter-sujet** (entre les plantes) : pas de différences significatives (F = 104 ou 131,7 pour les blocs Sujet et Sujet:Répétition), donc les plantes individuelles ne présentent pas de variations globales importantes selon le type de terreau ou la variété.
+
+* **Effet intra-sujet** (répétitions sur chaque plante) :
+
+  * **Terreau** : F = 6,01, p = 0,00283 : effet significatif du type de terreau sur la hauteur des plantes à travers les répétitions.
+  
+  * **Variété** : F = 14,14, p = 0,000212 : effet significatif de la variété sur la hauteur des plantes à travers les répétitions.
+
+**Conclusion** : à travers les mesures répétées, le type de terreau et la variété influencent significativement la croissance des plantes, même si les différences globales entre les plantes individuelles ne sont pas significatives.
+
+## 4. ANOVA à deux facteurs avec interaction {-}
+
+```{r}
+anova_2facteurs_int <- aov(
+  Hauteur ~ Terreau * variété + Error(Sujet/Répétition),
+  data = data
+)
+summary(anova_2facteurs_int)
+```
+L’analyse montre que :
+
+* **Effets principaux intra-sujets** (répétitions sur chaque plante) :
+
+  * **Terreau** : F = 5,961, p = 0,00297 : effet significatif du type de terreau sur la hauteur des plantes à travers les répétitions.
+
+  * **Variété** : F = 14,025, p = 0,000225 → effet significatif de la variété sur la hauteur des plantes à travers les répétitions.
+
+* **Interaction Terreau × Variété** : F = 0,012, p = 0,988 → interaction non significative, ce qui indique que l’effet du type de terreau est similaire pour toutes les variétés, et inversement.
+
+**Conclusion** : la croissance des plantes est influencée indépendamment par le type de terreau et par la variété, mais il n’existe pas d’effet combiné supplémentaire entre ces deux facteurs.
+
+
+## 5. Modèle final {-}
+
+Après analyse, le modèle à deux facteurs avec interaction a montré que l’interaction entre le type de terreau et la variété n’était pas significative (p = 0,988). Les effets principaux de Terreau et de Variété sont en revanche significatifs. Pour simplifier l’interprétation et respecter le principe de parcimonie, nous retenons donc le modèle final sans interaction :
+
+
+hauteur $\sim$ Terreau $+$ Variété $+$ Error(Sujet/Répétition)
+
+Ce modèle permet de mettre en évidence l’effet indépendant du type de terreau et de la variété sur la croissance des plantes, tout en conservant la structure des mesures répétées.

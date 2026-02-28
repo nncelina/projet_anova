@@ -1,0 +1,521 @@
+# I. Théorie sur l'ANOVA à mesure répétée {-}
+
+
+L’Analyse de la Variance à Mesures Répétées (ANOVA-MR) est une extension de l’ANOVA classique adaptée aux situations où **les mêmes individus sont mesurés plusieurs fois**, au cours du temps ou sous différentes conditions expérimentales.
+
+Elle tente de répondre à la question centrale : comment évaluer rigoureusement si les variations observées chez un même individu (dans le temps ou entre conditions) sont statistiquement significatives, tout en contrôlant la variabilité individuelle et les corrélations intra-sujets ?
+
+Contrairement à l’ANOVA classique, qui suppose l’indépendance des observations, l’ANOVA à mesures répétées tient compte de la corrélation intra-sujet (les mesures provenant d’un même individu ne sont pas indépendantes). 
+
+C’est-à-dire :
+
+$$
+\mathrm{Cov}(Y_{ij}, Y_{ik}) \neq 0
+\quad \text{pour } j \neq k,
+$$
+
+où $j$ et $k$ indexent deux mesures différentes
+effectuées sur un même individu.
+
+Autrement dit, les observations répétées chez un même sujet
+ne sont pas indépendantes.
+
+L’ANOVA à mesures répétées permet ainsi de modéliser
+explicitement cette dépendance intra-sujet.
+
+## 1. Notations {-}
+
+On observe $n$ sujets mesurés à $t$ temps (ou conditions).
+Les données sont notées :
+
+$$
+Y_{ij}, \quad i=1,\dots,n, \quad j=1,\dots,t
+$$
+
+où :
+
+* $i$ désigne le sujet,
+* $j$ désigne le temps ou la condition.
+
+Chaque sujet est donc mesuré plusieurs fois,
+ce qui introduit une corrélation entre les observations d’un même individu.
+
+### Décomposition de la variance {-}
+
+La somme totale des carrés est :
+
+$$
+SCT = \sum_{i=1}^{n} \sum_{j=1}^{t}
+(Y_{ij} - \bar{Y}_{..})^2
+$$
+
+Elle se décompose en :
+
+$$
+SCT =
+SS_{\text{sujets}}
++
+SS_{\text{temps}}
++
+SS_{\text{erreur}}.
+$$
+
+* **Somme des carrés due aux sujets :**
+
+$$
+SS_{\text{sujets}}
+=
+t \sum_{i=1}^{n}
+(\bar{Y}_{i.} - \bar{Y}_{..})^2
+$$
+
+Elle mesure la variabilité inter-individuelle.
+
+* **Somme des carrés due au temps :**
+
+$$
+SS_{\text{temps}}
+=
+n \sum_{j=1}^{t}
+(\bar{Y}_{.j} - \bar{Y}_{..})^2
+$$
+
+Elle représente l’effet du facteur intra-sujet.
+
+* **Somme des carrés résiduelle :**
+
+$$
+SS_{\text{erreur}}
+=
+\sum_{i=1}^{n} \sum_{j=1}^{t}
+\left(
+Y_{ij}
+-
+\bar{Y}_{i.}
+-
+\bar{Y}_{.j}
++
+\bar{Y}_{..}
+\right)^2
+$$
+
+Elle correspond à l’interaction sujet $\times$ temps, c’est-à-dire à la variabilité non expliquée par les effets principaux.
+
+
+## 2. Tests spécifiques à l’ANOVA à mesures répétées {-}
+
+Contrairement à l’ANOVA classique, l’ANOVA à mesures répétées
+nécessite des vérifications supplémentaires liées à la dépendance
+intra-sujet.
+
+### a. Test de sphéricité (Mauchly) {-}
+
+Il vérifie l’hypothèse de **sphéricité**, condition fondamentale du modèle.
+
+* **Hypothèses**
+
+\[
+H_0 : \Sigma = \sigma^2 I
+\quad \text{(sphéricité respectée)}
+\]
+
+\[
+H_1 : \text{sphéricité non respectée}
+\]
+
+Cela revient à supposer que :
+\[
+\mathrm{Var}(Y_i - Y_j) = \text{constante} \quad \forall (i,j).
+\]
+
+* **Statistique** :
+
+\[
+W = \frac{|S|}
+{\left(\dfrac{\mathrm{tr}(S)}{k-1}\right)^{k-1}},
+\]
+
+avec $S$ matrice de covariance des différences et $k$ le nombre de conditions.
+
+  * **Approximation** :
+
+\[
+\chi^2 = -(N-1)\ln(W)
+\sim \chi^2_{\frac{k(k-1)}{2}-1}.
+\]
+
+Si p-value $< \alpha$, on applique une correction :
+
+* Greenhouse--Geisser,
+
+* Huynh--Feldt.
+
+
+### b. Tests intra-sujets{-}
+
+Ils analysent les variations à l’intérieur d’un même individu (évolution dans le temps ou entre conditions).
+
+* **Effet principal du temps** :
+
+\[
+H_0 : \tau_1 = \tau_2 = \cdots = \tau_k
+\quad
+H_1 : \text{au moins deux temps diffèrent.}
+\]
+
+  * **Statistique de test** :
+
+\[
+F =
+\frac{SCE_{\text{temps}}/(k-1)}
+{SCR_{\text{intra}}/[(k-1)(N-1)]}.
+\]
+
+Sous $H_0$ (et si sphéricité respectée) :
+
+\[
+F \sim F(k-1,(k-1)(N-1)).
+\]
+
+* **Comparaisons complémentaires**
+
+Si l’effet principal est significatif :
+
+  * Contrastes (polynomial, Helmert, différences),
+  
+  * Comparaisons post-hoc (Bonferroni, Tukey).
+
+### c. Interaction temps et groupe (design mixte) {-}
+
+On étudie l’interaction entre un facteur intra-sujet (temps) et un facteur inter-sujets (groupe).
+
+\[
+H_0 : \text{profils d’évolution parallèles entre groupes}
+\]
+
+\[
+H_1 : \text{au moins un groupe a un profil différent.}
+\]
+
+Si l’interaction est significative :
+
+* **Analyse des effets simples** :
+
+  * effet du temps dans chaque groupe,
+  
+  * effet du groupe à chaque temps ;
+  
+* **Comparaisons multiples** (Bonferroni, Tukey).
+
+
+## 3. Modélisation et tests en ANOVA à mesures répétées {-}
+
+### a.  ANOVA à un facteur intra-sujet {-}
+
+On observe $n$ sujets mesurés à $t$ temps (ou conditions).
+
+* **Modèle**
+
+\[
+Y_{is} = \mu + \tau_s + \alpha_i + \varepsilon_{is}
+\]
+
+où :
+
+  * $\mu$ : moyenne générale,
+
+  * $\tau_s$ : effet fixe du facteur intra-sujet,
+
+  * $\alpha_i \sim \mathcal{N}(0,\sigma_\alpha^2)$ : effet aléatoire sujet,
+
+  * $\varepsilon_{is} \sim \mathcal{N}(0,\sigma^2)$ : erreur.
+
+* **Hypothèse testée**
+
+\[
+H_0 : \tau_1 = \tau_2 = \cdots = \tau_t
+\]
+
+\[
+H_1 : \text{au moins deux niveaux diffèrent}
+\]
+
+* **Statistique de test**
+
+\[
+F = \frac{CM_{\text{temps}}}{CM_{\text{erreur}}}
+\sim F(t-1,(t-1)(n-1))
+\]
+
+* **Règle de décision**
+
+Si $p$-value $< \alpha$, on rejette $H_0$ :
+le facteur intra-sujet a un effet significatif.
+
+Si la sphéricité est violée, on utilise les ddl corrigés
+(Greenhouse--Geisser ou Huynh--Feldt).
+
+### b. ANOVA à deux facteurs à mesures répétées (double intra-sujet){-}
+
+Chaque sujet est mesuré pour toutes les combinaisons
+des niveaux des deux facteurs $A$ et $B$.
+
+* **Modèle**
+
+\[
+Y_{ijs} =
+\mu + \alpha_i + \beta_j + \gamma_s
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{is}
++ (\beta\gamma)_{js}
++ \varepsilon_{ijs}
+\]
+
+où $\gamma_s$ représente l’effet aléatoire sujet.
+
+* **Hypothèses testées**
+
+Effet principal $A$ :
+
+\[
+H_0 : \alpha_1 = \cdots = \alpha_I
+\]
+
+Effet principal $B$ :
+
+\[
+H_0 : \beta_1 = \cdots = \beta_J
+\]
+
+Interaction :
+
+\[
+H_0 : (\alpha\beta)_{ij} = 0
+\]
+
+* **Statistiques de test**
+
+\[
+F_A = \frac{CM_A}{CM_{A \times Sujet}}
+\]
+
+\[
+F_B = \frac{CM_B}{CM_{B \times Sujet}}
+\]
+
+\[
+F_{AB} = \frac{CM_{AB}}{CM_{\text{erreur}}}
+\]
+
+* **Règle de décision**
+
+Si $p$-value $< \alpha$, l’effet est significatif.
+
+En cas d’effet principal significatif :
+comparaisons post-hoc ou contrastes.
+
+
+* **Contraintes d’identifiabilité**
+
+\[
+\sum_{i=1}^{I} \alpha_i = 0
+\qquad
+\sum_{j=1}^{J} \beta_j = 0
+\]
+
+\[
+\sum_{i=1}^{I} (\alpha\beta)_{ij} = 0
+\qquad
+\sum_{j=1}^{J} (\alpha\beta)_{ij} = 0
+\]
+
+\[
+\sum_{s} \rho_s = 0
+\]
+
+Les effets aléatoires sont centrés et indépendants.
+
+#### Tableau récapitulatif : ANOVA à 2 facteurs{-}
+
+
+```{r, echo=FALSE}
+# 1. Création des données
+anova_data <- data.frame(
+  Source = c("Facteur A", "Facteur B", "Interaction $A \\times B$", "Sujet", 
+             "Interaction $A \\times Sujet$", "Interaction $B \\times Sujet$", 
+             "Interaction $A \\times B \\times Sujet$", "Totale"),
+  Variation = c("$SC_A$", "$SC_B$", "$SC_{AB}$", "$SC_S$", "$SC_{A \\times S}$", 
+                "$SC_{B \\times S}$", "$SC_{AB \\times S}$", "$SC_T$"),
+  DL = c("$I-1$", "$J-1$", "$(I-1)(J-1)$", "$n-1$", "$(I-1)(n-1)$", 
+         "$(J-1)(n-1)$", "$(I-1)(J-1)(n-1)$", "$nIJ-1$"),
+  CM = c("$CM_A=\\frac{SC_A}{I-1}$", "$CM_B=\\frac{SC_B}{J-1}$", 
+         "$CM_{AB}=\\frac{SC_{AB}}{(I-1)(J-1)}$", "$CM_S=\\frac{SC_S}{n-1}$", 
+         "$CM_{A \\times S}=\\frac{SC_{A \\times S}}{(I-1)(n-1)}$", 
+         "$CM_{B \\times S}=\\frac{SC_{B \\times S}}{(J-1)(n-1)}$", 
+         "$CM_{AB \\times S}=\\frac{SC_{AB \\times S}}{(I-1)(J-1)(n-1)}$", ""),
+  F = c("$F_A=\\frac{CM_A}{CM_{A \\times S}}$", "$F_B=\\frac{CM_B}{CM_{B \\times S}}$", 
+        "$F_{AB}=\\frac{CM_{AB}}{CM_{AB \\times S}}$", "", "", "", "", "")
+)
+
+# 2. Rendu du tableau
+kbl(anova_data, 
+    caption = "Résumé des informations : ANOVA à 2 facteurs (MR sur A et B)",
+    escape = FALSE, # Important pour interpréter le LaTeX dans les cellules
+    col.names = c("Source", "Variation", "Degrés de liberté", "Carré Moyen", "F"),
+    align = "lcccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = TRUE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#FFA500") %>% # En-tête bleu
+  column_spec(1, width = "3cm") %>%
+  column_spec(2:5, width = "3cm")
+```
+
+
+### d. Modélisation d’une ANOVA avec trois facteurs {-}
+
+On considère trois facteurs fixes $A$, $B$ et $C$ ayant respectivement
+$I$, $J$ et $K$ niveaux. Selon le protocole expérimental, on peut avoir
+un, deux ou trois facteurs mesurés de manière répétée (intra-sujet).
+
+* **Formes usuelles du modèle**
+
+* **Cas 1** : *mesures répétées sur un seul facteur*
+
+On suppose que le facteur $A$ est répété (intra-sujet) et que $B$ et $C$
+sont inter-sujets. Un modèle possible est :
+
+\[
+Y_{ijk\ell}
+=
+\mu
++ \alpha_i
++ \delta_{\ell(i)}
++ \beta_j
++ \gamma_k
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{ik}
++ (\beta\gamma)_{jk}
++ (\alpha\beta\gamma)_{ijk}
++ \varepsilon_{ijk\ell},
+\]
+
+où $\delta_{\ell(i)}$ représente l’effet aléatoire du sujet $\ell$
+(imbriqué dans la modalité répétée), et $\varepsilon_{ijk\ell}$ l’erreur.
+
+  * **Cas 2** : *mesures répétées sur deux facteurs*
+
+On suppose que $A$ et $B$ sont répétés (intra-sujet), et $C$ inter-sujets.
+Un modèle s’écrit alors :
+
+\[
+Y_{ijk\ell}
+=
+\mu
++ \alpha_i
++ \beta_j
++ \delta_{\ell}
++ \gamma_k
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{ik}
++ (\beta\gamma)_{jk}
++ (\alpha\beta\gamma)_{ijk}
++ \varepsilon_{ijk\ell}.
+\]
+
+Ici, $\delta_{\ell}$ capture la variabilité propre à chaque sujet.
+
+* **Cas 3** : *mesures répétées sur les trois facteurs*
+
+Lorsque chaque sujet passe toutes les combinaisons des niveaux de $A$, $B$
+et $C$ (plan entièrement intra-sujet), on peut écrire :
+
+\[
+Y_{ijk\ell}
+=
+\mu
++ \alpha_i
++ \beta_j
++ \gamma_k
++ \delta_{\ell}
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{ik}
++ (\beta\gamma)_{jk}
++ (\alpha\beta\gamma)_{ijk}
++ \varepsilon_{ijk\ell}.
+\]
+
+\subsection{Contraintes d’identifiabilité}
+
+Pour assurer l’unicité des paramètres (effets centrés), on impose
+classiquement :
+
+\[
+\sum_{i=1}^{I}\alpha_i=0,
+\qquad
+\sum_{j=1}^{J}\beta_j=0,
+\qquad
+\sum_{k=1}^{K}\gamma_k=0.
+\]
+
+Pour les interactions, les sommes sont nulles sur chacun des indices, par exemple :
+
+\[
+\sum_{i=1}^{I}(\alpha\beta)_{ij}=0 \ \forall j,
+\qquad
+\sum_{j=1}^{J}(\alpha\beta)_{ij}=0 \ \forall i,
+\]
+
+et de même pour $(\alpha\gamma)_{ik}$, $(\beta\gamma)_{jk}$ et
+$(\alpha\beta\gamma)_{ijk}$ (somme nulle sur chaque dimension).
+
+
+#### Tableau récapitulatif {-}
+
+```{r, echo=FALSE}
+
+# 1. Préparation des données avec la syntaxe LaTeX échappée pour R
+anova3_data <- data.frame(
+  Source = c("Facteur $A$", "Facteur $B$", "Facteur $C$", "Interaction $AB$", 
+             "Interaction $AC$", "Interaction $BC$", "Interaction $ABC$", 
+             "Résiduelle", "Totale"),
+  Variation = c("$SC_A$", "$SC_B$", "$SC_C$", "$SC_{AB}$", "$SC_{AC}$", 
+                "$SC_{BC}$", "$SC_{ABC}$", "$SC_R$", "$SC_T$"),
+  ddl = c("$I-1$", "$J-1$", "$K-1$", "$(I-1)(J-1)$", "$(I-1)(K-1)$", 
+          "$(J-1)(K-1)$", "$(I-1)(J-1)(K-1)$", "$n - I - J - K - 1$", "$n-1$"),
+  CM = c("$CM_A=\\frac{SC_A}{I-1}$", "$CM_B=\\frac{SC_B}{J-1}$", 
+         "$CM_C=\\frac{SC_C}{K-1}$", "$CM_{AB}=\\frac{SC_{AB}}{(I-1)(J-1)}$", 
+         "$CM_{AC}=\\frac{SC_{AC}}{(I-1)(K-1)}$", "$CM_{BC}=\\frac{SC_{BC}}{(J-1)(K-1)}$", 
+         "$CM_{ABC}=\\frac{SC_{ABC}}{(I-1)(J-1)(K-1)}$", 
+         "$CM_R=\\frac{SC_R}{n - I - J - K - 1}$", ""),
+  F = c("$F_A=\\frac{CM_A}{CM_R}$", "$F_B=\\frac{CM_B}{CM_R}$", 
+        "$F_C=\\frac{CM_C}{CM_R}$", "$F_{AB}=\\frac{CM_{AB}}{CM_R}$", 
+        "$F_{AC}=\\frac{CM_{AC}}{CM_R}$", "$F_{BC}=\\frac{CM_{BC}}{CM_R}$", 
+        "$F_{ABC}=\\frac{CM_{ABC}}{CM_R}$", "", "")
+)
+
+# 2. Rendu du tableau avec style orange
+kbl(anova3_data, 
+    caption = "Synthèse des tests : ANOVA à trois facteurs",
+    escape = FALSE, 
+    col.names = c("Source", "Variation", "ddl", "Carré moyen", "F"),
+    align = "lcccc") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = TRUE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#FFA500") %>% # Orange pur
+  column_spec(1, width = "3cm") %>%
+  column_spec(2:5, width = "3cm")
+```
+
+
+
+* **Remarque** : le dénominateur exact (erreur appropriée) dépend du caractère
+inter/intra-sujet des facteurs. Si un ou plusieurs facteurs sont répétés, certaines erreurs
+doivent être remplacées par des interactions avec le sujet (ex. $A\times Sujet$, $AB\times Sujet$)
+et des corrections de ddl peuvent être nécessaires en cas de violation de sphéricité.
+
+
+
+Après avoir présenté les fondements théoriques de l’Analyse de la Variance
+et les différents modèles envisageables selon la structure expérimentale,
+nous passons désormais à l’application pratique sur les données
+issues de l’expérimentation relative aux types de terreau et aux variétés de plantes.

@@ -1,0 +1,190 @@
+# II. Analyse descriptive des variables d'étude {-}
+
+La base utilisée porte sur des données réelles recueillies dans le cadre d’une expérimentation.Dans le cadre de cette expérimentation, trois types de terreau : Manguier (Ma), Caïlcédrat (Ca) et Anacarde (An) ont été utilisées sur deux types de variétés de plantes (Var1 et Var2). L’expérience a été répété quatre fois et chaque fois on mesure la hauteur des plantes.
+
+Voici un aperçu de la base :
+
+```{r}
+head(data)
+```
+
+## 1. Description de la base de données {-}
+
+```{r, echo=FALSE}
+dim(data)
+```
+La base contient  5 variables et 253 lignes. Comme il y'a des répétitions, le nombre de ligne n'est pas égal au nombre d'individus. La variable de répetition se présente comme suit :
+
+```{r, echo=FALSE}
+tab_brute <- table(data$Répétition)
+df_tab <- as.data.frame(tab_brute)
+colnames(df_tab) <- c("Répétition", "Effectif (n)")
+kbl(df_tab, 
+    caption = "Répartition des données selon la répétition",
+    booktabs = TRUE, 
+    align = "lc") %>%
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = FALSE, 
+                position = "center") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#FFA500") # Entête Orange
+```
+
+### Valeurs manquantes {-}
+
+On constate des valeurs manquantes, car le nombre d'observations pour chaque répétition n'est pas le même.
+
+L’ANOVA à mesures répétées classique repose sur un plan complet et ne considère que les sujets disposant de l’ensemble des mesures. Les observations incomplètes sont donc exclues de l’analyse.
+
+Sous l’hypothèse que ces données manquantes sont aléatoires (MCAR), cette exclusion n’introduit pas de biais systématique mais peut réduire la puissance statistique.
+
+### Valeurs abberantes {-}
+
+Les données analysées proviennent d’une expérimentation agronomique contrôlée. Les hauteurs observées correspondent à des mesures physiques réelles et non à des déclarations ou des données administratives. Ainsi, les valeurs extrêmes potentielles reflètent davantage la variabilité biologique naturelle que des anomalies statistiques.
+
+Une inspection graphique par boîtes à moustaches, réalisée par répétition expérimentale, ne met pas en évidence de valeurs aberrantes isolées susceptibles d’indiquer une erreur de mesure ou de saisie. Les éventuelles valeurs extrêmes observées sont cohérentes avec la dispersion attendue dans un contexte biologique réel et ont donc été conservées dans l’analyse.
+
+```{r}
+boxplot(Hauteur ~ Répétition, data = data,
+        main = "Distribution des hauteurs par répétition",
+        ylab = "Hauteur")
+```
+
+
+## 2. Analyse univariée {-}
+
+### Variable hauteur {-}
+
+* **Résumé de la variable hauteur**
+
+Le tableau suivant présente quelques statistiques descriptives de la variable à expliquer hauteur, suivant les périodes.
+
+```{r, echo=FALSE}
+res <- tapply(data$Hauteur, data$Répétition, summary)
+tab <- do.call(rbind, res)
+tab <- as.data.frame(tab)
+tab$Repetition <- rownames(tab)
+tab <- tab[, c("Repetition", "Min.", "1st Qu.", "Median", "Mean", "3rd Qu.", "Max.")]
+rownames(tab) <- NULL
+tab[-1] <- lapply(tab[-1], round, 2)
+kbl(tab, 
+    caption = "Statistiques descriptives de la Hauteur par Répétition",
+    booktabs = TRUE, 
+    align = "lcccccc",
+    col.names = c("Répétition", "Min", "1er Quartile", "Médiane", "Moyenne", "3e Quartile", "Max")) %>%
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = TRUE) %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#FFA500") %>% # Entête Orange
+  column_spec(1, bold = TRUE) # Met en gras la première colonne
+```
+Les plantes semblent globalement connaître une nette évolution entre la période une et deux, puis une baisse de croissance entre la prériode 2 et 3, et enfin une hausse entre les deux dernières périodes.
+
+
+### Variable terreau {-}
+
+* **Résumé de la variable terreau**
+
+Le tableau suivante présente les effectifs de chaque type de terreau par période.
+
+```{r, echo=FALSE}
+tab <- data %>%
+  count(Répétition, Terreau) %>%
+  pivot_wider(names_from = Terreau, 
+              values_from = n, 
+              values_fill = 0)
+kbl(tab, 
+    caption = "Répartition du nombre d'observations par Répétition et par Terreau",
+    booktabs = TRUE, 
+    align = "c") %>% # Centrer toutes les colonnes pour un tableau de comptage
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = FALSE, 
+                position = "center") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#FFA500") %>% # Entête Orange
+  column_spec(1, bold = TRUE, background = "#F9F9F9") %>% # Colonne Répétition légèrement grisée
+  add_header_above(c(" " = 1, "Types de Terreau" = ncol(tab) - 1)) # Ajoute une barre de titre au-dessus des terreaux
+```
+Ce tableau est illustré par les diagrammes en barre suivant :
+
+* **Diagramme en barre de la variable terreau**
+
+```{r, echo=FALSE}
+ggplot(data, aes(x = Terreau)) +
+  geom_bar(fill = "orange") +
+  facet_wrap(~ Répétition) +
+  labs(title = "Diagramme en barres par répétition",
+       x = "Terreau",
+       y = "Effectif") +
+  theme_minimal()
+```
+
+### Variable variété {-}
+
+* **Résumé de la variable variété**
+
+Le tableau suivante présente les effectifs de chaque type de variété par période
+
+```{r, echo=FALSE}
+tab <- data %>%
+  count(Répétition, variété) %>%
+  pivot_wider(names_from = variété, 
+              values_from = n, 
+              values_fill = 0)
+kbl(tab, 
+    caption = "Répartition du nombre d'observations par Répétition et par variété",
+    booktabs = TRUE, 
+    align = "c") %>% # Centrer toutes les colonnes pour un tableau de comptage
+  kable_styling(latex_options = c("striped", "hold_position"), 
+                full_width = FALSE, 
+                position = "center") %>%
+  row_spec(0, bold = TRUE, color = "white", background = "#FFA500") %>% # Entête Orange
+  column_spec(1, bold = TRUE, background = "#F9F9F9") %>% # Colonne Répétition légèrement grisée
+  add_header_above(c(" " = 1, "Types de variété" = ncol(tab) - 1)) # Ajoute une barre de titre au-dessus des variété
+```
+Ce tableau est illustré par les diagrammes suivants :
+
+* **Diagramme en barre de la variable variété**
+
+```{r, echo=FALSE}
+ggplot(data, aes(x = variété)) +
+  geom_bar(fill = "orange") +
+  facet_wrap(~ Répétition) +
+  labs(title = "Diagramme en barres par répétition",
+       x = "variété",
+       y = "Effectif") +
+  theme_minimal()
+```
+
+## 3. Analyse bivariée {-}
+
+### Variable terreau et hauteur {-}
+
+La figure suivante présente les boxplots de la variable hauteur selon les modalités de la variable terreau et suivant les périodes.
+
+```{r, echo=FALSE}
+ggplot(data, aes(x = Terreau, y = Hauteur)) +
+  geom_boxplot() +
+  facet_wrap(~ Répétition) +
+  labs(title = "Hauteur selon Terreau",
+       x = "Terreau",
+       y = "Hauteur") +
+  theme_minimal()
+```
+
+D'après ces boxplots, nous pouvons constater qu'au cours des périodes 1 et 2, le type de terreau utilisé ne semble pas influencer la hauteur des plantes. Durant les périodes 3 et 4 cependant, le type de terreau semble avoir un effet sur les plantes. En effet, les plantes ayant utilisées le terreau de type Ca semblent plus grandes que les autres.
+
+### Variable variété et hauteur {-}
+
+La figure suivante présente les boxplots de la variable hauteur selon les modalités de la variable variété et suivant les périodes.
+
+```{r, echo=FALSE}
+ggplot(data, aes(x = variété, y = Hauteur)) +
+  geom_boxplot() +
+  facet_wrap(~ Répétition) +
+  labs(title = "Hauteur selon variété",
+       x = "variété",
+       y = "Hauteur") +
+  theme_minimal()
+```
+
+ID'après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.
+
+Toutes ces observations vont être testées de façon plus rigoureuses par l'ANOVA à mesure répétées.

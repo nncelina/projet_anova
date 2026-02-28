@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>I. Théorie sur l’ANOVA à mesure répétée | TP d’ANOVA</title>
+  <meta name="description" content="I. Théorie sur l’ANOVA à mesure répétée | TP d’ANOVA" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="I. Théorie sur l’ANOVA à mesure répétée | TP d’ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="I. Théorie sur l’ANOVA à mesure répétée | TP d’ANOVA" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="ii.-analyse-descriptive-des-variables-détude.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<link rel="shortcut icon" href="images/bookdown.ico" type="image/x-icon">
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style="text-align:center;">
+  <img src="images/cheap.png" style="max-width:200px; width:100%; height:auto; display:inline-block; margin-bottom:0.35em;">
+</li>
+<li><a href="index.html">ANOVA à mesure répétée</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html"><i class="fa fa-check"></i>I. Théorie sur l’ANOVA à mesure répétée</a>
+<ul>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html#notations"><i class="fa fa-check"></i>1. Notations</a></li>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html#tests-spécifiques-à-lanova-à-mesures-répétées"><i class="fa fa-check"></i>2. Tests spécifiques à l’ANOVA à mesures répétées</a></li>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html#modélisation-et-tests-en-anova-à-mesures-répétées"><i class="fa fa-check"></i>3. Modélisation et tests en ANOVA à mesures répétées</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html"><i class="fa fa-check"></i>II. Analyse descriptive des variables d’étude</a>
+<ul>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#description-de-la-base-de-données"><i class="fa fa-check"></i>1. Description de la base de données</a></li>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-univariée"><i class="fa fa-check"></i>2. Analyse univariée</a></li>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-bivariée"><i class="fa fa-check"></i>3. Analyse bivariée</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html"><i class="fa fa-check"></i>IV. Pratique</a>
+<ul>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#tests-dhypothèses-de-lanova"><i class="fa fa-check"></i>1. Tests d’hypothèses de l’ANOVA</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-un-facteur"><i class="fa fa-check"></i>2. ANOVA à un facteur</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-sans-interaction"><i class="fa fa-check"></i>3. ANOVA à deux facteurs sans interaction</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-avec-interaction"><i class="fa fa-check"></i>4. ANOVA à deux facteurs avec interaction</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#modèle-final"><i class="fa fa-check"></i>5. Modèle final</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TP d’ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="i.-théorie-sur-lanova-à-mesure-répétée" class="section level1 unnumbered hasAnchor">
+<h1>I. Théorie sur l’ANOVA à mesure répétée<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#i.-théorie-sur-lanova-à-mesure-répétée" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>L’Analyse de la Variance à Mesures Répétées (ANOVA-MR) est une extension de l’ANOVA classique adaptée aux situations où <strong>les mêmes individus sont mesurés plusieurs fois</strong>, au cours du temps ou sous différentes conditions expérimentales.</p>
+<p>Elle tente de répondre à la question centrale : comment évaluer rigoureusement si les variations observées chez un même individu (dans le temps ou entre conditions) sont statistiquement significatives, tout en contrôlant la variabilité individuelle et les corrélations intra-sujets ?</p>
+<p>Contrairement à l’ANOVA classique, qui suppose l’indépendance des observations, l’ANOVA à mesures répétées tient compte de la corrélation intra-sujet (les mesures provenant d’un même individu ne sont pas indépendantes).</p>
+<p>C’est-à-dire :</p>
+<p><span class="math display">\[
+\mathrm{Cov}(Y_{ij}, Y_{ik}) \neq 0
+\quad \text{pour } j \neq k,
+\]</span></p>
+<p>où <span class="math inline">\(j\)</span> et <span class="math inline">\(k\)</span> indexent deux mesures différentes
+effectuées sur un même individu.</p>
+<p>Autrement dit, les observations répétées chez un même sujet
+ne sont pas indépendantes.</p>
+<p>L’ANOVA à mesures répétées permet ainsi de modéliser
+explicitement cette dépendance intra-sujet.</p>
+<div id="notations" class="section level2 unnumbered hasAnchor">
+<h2>1. Notations<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#notations" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>On observe <span class="math inline">\(n\)</span> sujets mesurés à <span class="math inline">\(t\)</span> temps (ou conditions).
+Les données sont notées :</p>
+<p><span class="math display">\[
+Y_{ij}, \quad i=1,\dots,n, \quad j=1,\dots,t
+\]</span></p>
+<p>où :</p>
+<ul>
+<li><span class="math inline">\(i\)</span> désigne le sujet,</li>
+<li><span class="math inline">\(j\)</span> désigne le temps ou la condition.</li>
+</ul>
+<p>Chaque sujet est donc mesuré plusieurs fois,
+ce qui introduit une corrélation entre les observations d’un même individu.</p>
+<div id="décomposition-de-la-variance" class="section level3 unnumbered hasAnchor">
+<h3>Décomposition de la variance<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#décomposition-de-la-variance" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>La somme totale des carrés est :</p>
+<p><span class="math display">\[
+SCT = \sum_{i=1}^{n} \sum_{j=1}^{t}
+(Y_{ij} - \bar{Y}_{..})^2
+\]</span></p>
+<p>Elle se décompose en :</p>
+<p><span class="math display">\[
+SCT =
+SS_{\text{sujets}}
++
+SS_{\text{temps}}
++
+SS_{\text{erreur}}.
+\]</span></p>
+<ul>
+<li><strong>Somme des carrés due aux sujets :</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\text{sujets}}
+=
+t \sum_{i=1}^{n}
+(\bar{Y}_{i.} - \bar{Y}_{..})^2
+\]</span></p>
+<p>Elle mesure la variabilité inter-individuelle.</p>
+<ul>
+<li><strong>Somme des carrés due au temps :</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\text{temps}}
+=
+n \sum_{j=1}^{t}
+(\bar{Y}_{.j} - \bar{Y}_{..})^2
+\]</span></p>
+<p>Elle représente l’effet du facteur intra-sujet.</p>
+<ul>
+<li><strong>Somme des carrés résiduelle :</strong></li>
+</ul>
+<p><span class="math display">\[
+SS_{\text{erreur}}
+=
+\sum_{i=1}^{n} \sum_{j=1}^{t}
+\left(
+Y_{ij}
+-
+\bar{Y}_{i.}
+-
+\bar{Y}_{.j}
++
+\bar{Y}_{..}
+\right)^2
+\]</span></p>
+<p>Elle correspond à l’interaction sujet <span class="math inline">\(\times\)</span> temps, c’est-à-dire à la variabilité non expliquée par les effets principaux.</p>
+</div>
+</div>
+<div id="tests-spécifiques-à-lanova-à-mesures-répétées" class="section level2 unnumbered hasAnchor">
+<h2>2. Tests spécifiques à l’ANOVA à mesures répétées<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#tests-spécifiques-à-lanova-à-mesures-répétées" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Contrairement à l’ANOVA classique, l’ANOVA à mesures répétées
+nécessite des vérifications supplémentaires liées à la dépendance
+intra-sujet.</p>
+<div id="a.-test-de-sphéricité-mauchly" class="section level3 unnumbered hasAnchor">
+<h3>a. Test de sphéricité (Mauchly)<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#a.-test-de-sphéricité-mauchly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Il vérifie l’hypothèse de <strong>sphéricité</strong>, condition fondamentale du modèle.</p>
+<ul>
+<li><strong>Hypothèses</strong></li>
+</ul>
+<p><span class="math display">\[
+H_0 : \Sigma = \sigma^2 I
+\quad \text{(sphéricité respectée)}
+\]</span></p>
+<p><span class="math display">\[
+H_1 : \text{sphéricité non respectée}
+\]</span></p>
+<p>Cela revient à supposer que :
+<span class="math display">\[
+\mathrm{Var}(Y_i - Y_j) = \text{constante} \quad \forall (i,j).
+\]</span></p>
+<ul>
+<li><strong>Statistique</strong> :</li>
+</ul>
+<p><span class="math display">\[
+W = \frac{|S|}
+{\left(\dfrac{\mathrm{tr}(S)}{k-1}\right)^{k-1}},
+\]</span></p>
+<p>avec <span class="math inline">\(S\)</span> matrice de covariance des différences et <span class="math inline">\(k\)</span> le nombre de conditions.</p>
+<ul>
+<li><strong>Approximation</strong> :</li>
+</ul>
+<p><span class="math display">\[
+\chi^2 = -(N-1)\ln(W)
+\sim \chi^2_{\frac{k(k-1)}{2}-1}.
+\]</span></p>
+<p>Si p-value <span class="math inline">\(&lt; \alpha\)</span>, on applique une correction :</p>
+<ul>
+<li><p>Greenhouse–Geisser,</p></li>
+<li><p>Huynh–Feldt.</p></li>
+</ul>
+</div>
+<div id="b.-tests-intra-sujets" class="section level3 unnumbered hasAnchor">
+<h3>b. Tests intra-sujets<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#b.-tests-intra-sujets" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Ils analysent les variations à l’intérieur d’un même individu (évolution dans le temps ou entre conditions).</p>
+<ul>
+<li><strong>Effet principal du temps</strong> :</li>
+</ul>
+<p><span class="math display">\[
+H_0 : \tau_1 = \tau_2 = \cdots = \tau_k
+\quad
+H_1 : \text{au moins deux temps diffèrent.}
+\]</span></p>
+<ul>
+<li><strong>Statistique de test</strong> :</li>
+</ul>
+<p><span class="math display">\[
+F =
+\frac{SCE_{\text{temps}}/(k-1)}
+{SCR_{\text{intra}}/[(k-1)(N-1)]}.
+\]</span></p>
+<p>Sous <span class="math inline">\(H_0\)</span> (et si sphéricité respectée) :</p>
+<p><span class="math display">\[
+F \sim F(k-1,(k-1)(N-1)).
+\]</span></p>
+<ul>
+<li><strong>Comparaisons complémentaires</strong></li>
+</ul>
+<p>Si l’effet principal est significatif :</p>
+<ul>
+<li><p>Contrastes (polynomial, Helmert, différences),</p></li>
+<li><p>Comparaisons post-hoc (Bonferroni, Tukey).</p></li>
+</ul>
+</div>
+<div id="c.-interaction-temps-et-groupe-design-mixte" class="section level3 unnumbered hasAnchor">
+<h3>c. Interaction temps et groupe (design mixte)<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#c.-interaction-temps-et-groupe-design-mixte" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On étudie l’interaction entre un facteur intra-sujet (temps) et un facteur inter-sujets (groupe).</p>
+<p><span class="math display">\[
+H_0 : \text{profils d’évolution parallèles entre groupes}
+\]</span></p>
+<p><span class="math display">\[
+H_1 : \text{au moins un groupe a un profil différent.}
+\]</span></p>
+<p>Si l’interaction est significative :</p>
+<ul>
+<li><p><strong>Analyse des effets simples</strong> :</p>
+<ul>
+<li><p>effet du temps dans chaque groupe,</p></li>
+<li><p>effet du groupe à chaque temps ;</p></li>
+</ul></li>
+<li><p><strong>Comparaisons multiples</strong> (Bonferroni, Tukey).</p></li>
+</ul>
+</div>
+</div>
+<div id="modélisation-et-tests-en-anova-à-mesures-répétées" class="section level2 unnumbered hasAnchor">
+<h2>3. Modélisation et tests en ANOVA à mesures répétées<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#modélisation-et-tests-en-anova-à-mesures-répétées" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="a.-anova-à-un-facteur-intra-sujet" class="section level3 unnumbered hasAnchor">
+<h3>a. ANOVA à un facteur intra-sujet<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#a.-anova-à-un-facteur-intra-sujet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On observe <span class="math inline">\(n\)</span> sujets mesurés à <span class="math inline">\(t\)</span> temps (ou conditions).</p>
+<ul>
+<li><strong>Modèle</strong></li>
+</ul>
+<p><span class="math display">\[
+Y_{is} = \mu + \tau_s + \alpha_i + \varepsilon_{is}
+\]</span></p>
+<p>où :</p>
+<ul>
+<li><p><span class="math inline">\(\mu\)</span> : moyenne générale,</p></li>
+<li><p><span class="math inline">\(\tau_s\)</span> : effet fixe du facteur intra-sujet,</p></li>
+<li><p><span class="math inline">\(\alpha_i \sim \mathcal{N}(0,\sigma_\alpha^2)\)</span> : effet aléatoire sujet,</p></li>
+<li><p><span class="math inline">\(\varepsilon_{is} \sim \mathcal{N}(0,\sigma^2)\)</span> : erreur.</p></li>
+<li><p><strong>Hypothèse testée</strong></p></li>
+</ul>
+<p><span class="math display">\[
+H_0 : \tau_1 = \tau_2 = \cdots = \tau_t
+\]</span></p>
+<p><span class="math display">\[
+H_1 : \text{au moins deux niveaux diffèrent}
+\]</span></p>
+<ul>
+<li><strong>Statistique de test</strong></li>
+</ul>
+<p><span class="math display">\[
+F = \frac{CM_{\text{temps}}}{CM_{\text{erreur}}}
+\sim F(t-1,(t-1)(n-1))
+\]</span></p>
+<ul>
+<li><strong>Règle de décision</strong></li>
+</ul>
+<p>Si <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \alpha\)</span>, on rejette <span class="math inline">\(H_0\)</span> :
+le facteur intra-sujet a un effet significatif.</p>
+<p>Si la sphéricité est violée, on utilise les ddl corrigés
+(Greenhouse–Geisser ou Huynh–Feldt).</p>
+</div>
+<div id="b.-anova-à-deux-facteurs-à-mesures-répétées-double-intra-sujet" class="section level3 unnumbered hasAnchor">
+<h3>b. ANOVA à deux facteurs à mesures répétées (double intra-sujet)<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#b.-anova-à-deux-facteurs-à-mesures-répétées-double-intra-sujet" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Chaque sujet est mesuré pour toutes les combinaisons
+des niveaux des deux facteurs <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span>.</p>
+<ul>
+<li><strong>Modèle</strong></li>
+</ul>
+<p><span class="math display">\[
+Y_{ijs} =
+\mu + \alpha_i + \beta_j + \gamma_s
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{is}
++ (\beta\gamma)_{js}
++ \varepsilon_{ijs}
+\]</span></p>
+<p>où <span class="math inline">\(\gamma_s\)</span> représente l’effet aléatoire sujet.</p>
+<ul>
+<li><strong>Hypothèses testées</strong></li>
+</ul>
+<p>Effet principal <span class="math inline">\(A\)</span> :</p>
+<p><span class="math display">\[
+H_0 : \alpha_1 = \cdots = \alpha_I
+\]</span></p>
+<p>Effet principal <span class="math inline">\(B\)</span> :</p>
+<p><span class="math display">\[
+H_0 : \beta_1 = \cdots = \beta_J
+\]</span></p>
+<p>Interaction :</p>
+<p><span class="math display">\[
+H_0 : (\alpha\beta)_{ij} = 0
+\]</span></p>
+<ul>
+<li><strong>Statistiques de test</strong></li>
+</ul>
+<p><span class="math display">\[
+F_A = \frac{CM_A}{CM_{A \times Sujet}}
+\]</span></p>
+<p><span class="math display">\[
+F_B = \frac{CM_B}{CM_{B \times Sujet}}
+\]</span></p>
+<p><span class="math display">\[
+F_{AB} = \frac{CM_{AB}}{CM_{\text{erreur}}}
+\]</span></p>
+<ul>
+<li><strong>Règle de décision</strong></li>
+</ul>
+<p>Si <span class="math inline">\(p\)</span>-value <span class="math inline">\(&lt; \alpha\)</span>, l’effet est significatif.</p>
+<p>En cas d’effet principal significatif :
+comparaisons post-hoc ou contrastes.</p>
+<ul>
+<li><strong>Contraintes d’identifiabilité</strong></li>
+</ul>
+<p><span class="math display">\[
+\sum_{i=1}^{I} \alpha_i = 0
+\qquad
+\sum_{j=1}^{J} \beta_j = 0
+\]</span></p>
+<p><span class="math display">\[
+\sum_{i=1}^{I} (\alpha\beta)_{ij} = 0
+\qquad
+\sum_{j=1}^{J} (\alpha\beta)_{ij} = 0
+\]</span></p>
+<p><span class="math display">\[
+\sum_{s} \rho_s = 0
+\]</span></p>
+<p>Les effets aléatoires sont centrés et indépendants.</p>
+<div id="tableau-récapitulatif-anova-à-2-facteurs" class="section level4 unnumbered hasAnchor">
+<h4>Tableau récapitulatif : ANOVA à 2 facteurs<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#tableau-récapitulatif-anova-à-2-facteurs" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-1">Table 1: </span>Résumé des informations : ANOVA à 2 facteurs (MR sur A et B)
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Source
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Variation
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Degrés de liberté
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Carré Moyen
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+F
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Facteur A
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_A\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(I-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_A=\frac{SC_A}{I-1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_A=\frac{CM_A}{CM_{A \times S}}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Facteur B
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_B\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(J-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_B=\frac{SC_B}{J-1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_B=\frac{CM_B}{CM_{B \times S}}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(A \times B\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{AB}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((I-1)(J-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{AB}=\frac{SC_{AB}}{(I-1)(J-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_{AB}=\frac{CM_{AB}}{CM_{AB \times S}}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Sujet
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_S\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(n-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_S=\frac{SC_S}{n-1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(A \times Sujet\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{A \times S}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((I-1)(n-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{A \times S}=\frac{SC_{A \times S}}{(I-1)(n-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(B \times Sujet\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{B \times S}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((J-1)(n-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{B \times S}=\frac{SC_{B \times S}}{(J-1)(n-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(A \times B \times Sujet\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{AB \times S}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((I-1)(J-1)(n-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{AB \times S}=\frac{SC_{AB \times S}}{(I-1)(J-1)(n-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Totale
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_T\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(nIJ-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="d.-modélisation-dune-anova-avec-trois-facteurs" class="section level3 unnumbered hasAnchor">
+<h3>d. Modélisation d’une ANOVA avec trois facteurs<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#d.-modélisation-dune-anova-avec-trois-facteurs" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>On considère trois facteurs fixes <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span> et <span class="math inline">\(C\)</span> ayant respectivement
+<span class="math inline">\(I\)</span>, <span class="math inline">\(J\)</span> et <span class="math inline">\(K\)</span> niveaux. Selon le protocole expérimental, on peut avoir
+un, deux ou trois facteurs mesurés de manière répétée (intra-sujet).</p>
+<ul>
+<li><p><strong>Formes usuelles du modèle</strong></p></li>
+<li><p><strong>Cas 1</strong> : <em>mesures répétées sur un seul facteur</em></p></li>
+</ul>
+<p>On suppose que le facteur <span class="math inline">\(A\)</span> est répété (intra-sujet) et que <span class="math inline">\(B\)</span> et <span class="math inline">\(C\)</span>
+sont inter-sujets. Un modèle possible est :</p>
+<p><span class="math display">\[
+Y_{ijk\ell}
+=
+\mu
++ \alpha_i
++ \delta_{\ell(i)}
++ \beta_j
++ \gamma_k
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{ik}
++ (\beta\gamma)_{jk}
++ (\alpha\beta\gamma)_{ijk}
++ \varepsilon_{ijk\ell},
+\]</span></p>
+<p>où <span class="math inline">\(\delta_{\ell(i)}\)</span> représente l’effet aléatoire du sujet <span class="math inline">\(\ell\)</span>
+(imbriqué dans la modalité répétée), et <span class="math inline">\(\varepsilon_{ijk\ell}\)</span> l’erreur.</p>
+<ul>
+<li><strong>Cas 2</strong> : <em>mesures répétées sur deux facteurs</em></li>
+</ul>
+<p>On suppose que <span class="math inline">\(A\)</span> et <span class="math inline">\(B\)</span> sont répétés (intra-sujet), et <span class="math inline">\(C\)</span> inter-sujets.
+Un modèle s’écrit alors :</p>
+<p><span class="math display">\[
+Y_{ijk\ell}
+=
+\mu
++ \alpha_i
++ \beta_j
++ \delta_{\ell}
++ \gamma_k
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{ik}
++ (\beta\gamma)_{jk}
++ (\alpha\beta\gamma)_{ijk}
++ \varepsilon_{ijk\ell}.
+\]</span></p>
+<p>Ici, <span class="math inline">\(\delta_{\ell}\)</span> capture la variabilité propre à chaque sujet.</p>
+<ul>
+<li><strong>Cas 3</strong> : <em>mesures répétées sur les trois facteurs</em></li>
+</ul>
+<p>Lorsque chaque sujet passe toutes les combinaisons des niveaux de <span class="math inline">\(A\)</span>, <span class="math inline">\(B\)</span>
+et <span class="math inline">\(C\)</span> (plan entièrement intra-sujet), on peut écrire :</p>
+<p><span class="math display">\[
+Y_{ijk\ell}
+=
+\mu
++ \alpha_i
++ \beta_j
++ \gamma_k
++ \delta_{\ell}
++ (\alpha\beta)_{ij}
++ (\alpha\gamma)_{ik}
++ (\beta\gamma)_{jk}
++ (\alpha\beta\gamma)_{ijk}
++ \varepsilon_{ijk\ell}.
+\]</span></p>
+<p>Pour assurer l’unicité des paramètres (effets centrés), on impose
+classiquement :</p>
+<p><span class="math display">\[
+\sum_{i=1}^{I}\alpha_i=0,
+\qquad
+\sum_{j=1}^{J}\beta_j=0,
+\qquad
+\sum_{k=1}^{K}\gamma_k=0.
+\]</span></p>
+<p>Pour les interactions, les sommes sont nulles sur chacun des indices, par exemple :</p>
+<p><span class="math display">\[
+\sum_{i=1}^{I}(\alpha\beta)_{ij}=0 \ \forall j,
+\qquad
+\sum_{j=1}^{J}(\alpha\beta)_{ij}=0 \ \forall i,
+\]</span></p>
+<p>et de même pour <span class="math inline">\((\alpha\gamma)_{ik}\)</span>, <span class="math inline">\((\beta\gamma)_{jk}\)</span> et
+<span class="math inline">\((\alpha\beta\gamma)_{ijk}\)</span> (somme nulle sur chaque dimension).</p>
+<div id="tableau-récapitulatif" class="section level4 unnumbered hasAnchor">
+<h4>Tableau récapitulatif<a href="i.-théorie-sur-lanova-à-mesure-répétée.html#tableau-récapitulatif" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:unnamed-chunk-2">Table 2: </span>Synthèse des tests : ANOVA à trois facteurs
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Source
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Variation
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+ddl
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+Carré moyen
+</th>
+<th style="text-align:center;font-weight: bold;color: white !important;background-color: rgba(255, 165, 0, 255) !important;">
+F
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Facteur <span class="math inline">\(A\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_A\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(I-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_A=\frac{SC_A}{I-1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_A=\frac{CM_A}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Facteur <span class="math inline">\(B\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_B\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(J-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_B=\frac{SC_B}{J-1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_B=\frac{CM_B}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Facteur <span class="math inline">\(C\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_C\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(K-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_C=\frac{SC_C}{K-1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_C=\frac{CM_C}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(AB\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{AB}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((I-1)(J-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{AB}=\frac{SC_{AB}}{(I-1)(J-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_{AB}=\frac{CM_{AB}}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(AC\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{AC}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((I-1)(K-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{AC}=\frac{SC_{AC}}{(I-1)(K-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_{AC}=\frac{CM_{AC}}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(BC\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{BC}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((J-1)(K-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{BC}=\frac{SC_{BC}}{(J-1)(K-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_{BC}=\frac{CM_{BC}}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Interaction <span class="math inline">\(ABC\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_{ABC}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\((I-1)(J-1)(K-1)\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_{ABC}=\frac{SC_{ABC}}{(I-1)(J-1)(K-1)}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(F_{ABC}=\frac{CM_{ABC}}{CM_R}\)</span>
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Résiduelle
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_R\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(n - I - J - K - 1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(CM_R=\frac{SC_R}{n - I - J - K - 1}\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+<tr>
+<td style="text-align:left;width: 3cm; ">
+Totale
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(SC_T\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+<span class="math inline">\(n-1\)</span>
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+<td style="text-align:center;width: 3cm; ">
+</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Remarque</strong> : le dénominateur exact (erreur appropriée) dépend du caractère
+inter/intra-sujet des facteurs. Si un ou plusieurs facteurs sont répétés, certaines erreurs
+doivent être remplacées par des interactions avec le sujet (ex. <span class="math inline">\(A\times Sujet\)</span>, <span class="math inline">\(AB\times Sujet\)</span>)
+et des corrections de ddl peuvent être nécessaires en cas de violation de sphéricité.</li>
+</ul>
+<p>Après avoir présenté les fondements théoriques de l’Analyse de la Variance
+et les différents modèles envisageables selon la structure expérimentale,
+nous passons désormais à l’application pratique sur les données
+issues de l’expérimentation relative aux types de terreau et aux variétés de plantes.</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="full-width-wrapper">
+<footer style="margin-top: 5em; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+<!-- Ligne décorative -->
+<div style="height: 4px; background: linear-gradient(90deg, #fdba74 0%, #f97316 50%, #fdba74 100%);"></div>
+
+<div style="background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%); 
+            color: #7c2d12; 
+            padding: 45px 0 25px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);">
+
+<div style="max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;">
+
+<!-- Bloc gauche -->
+<div style="flex: 1; min-width: 300px;">
+<div style="display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+
+<div style="width: 42px; height: 42px; border-radius: 14px;
+            background: rgba(249,115,22,0.15);
+            border: 1px solid rgba(249,115,22,0.35);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 20px rgba(249,115,22,0.25);">
+️🧮
+</div>
+
+<div>
+<h4 style="margin: 0; font-size: 1.15em; font-weight: 800; color: #7c2d12;">
+ANOVA à mesure répétée
+</h4>
+<p style="margin: 0; font-size: 0.85em; color: #f97316; font-weight: 700;">
+ANOVA — Projet académique
+</p>
+</div>
+</div>
+
+<!-- Citation -->
+<div style="padding-left: 14px; border-left: 3px solid #f97316;
+            font-style: italic; font-size: 0.85em; 
+            color: #92400e;">
+« L’analyse de la variance n’est pas un théorème mathématique, mais plutôt une manière commode d’organiser les calculs. »
+<br>
+<span style="font-weight: 700; color: #7c2d12;">— Ronald A. Fisher</span>
+</div>
+
+</div>
+</div>
+
+<!-- Bas du footer -->
+<div style="max-width: 1100px; margin: 30px auto 0 auto;
+            padding: 20px 20px 0 20px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            text-align: center;
+            font-size: 0.7em;
+            color: #9a3412;
+            letter-spacing: 1px;">
+Promotion ISE2 2025–2026  
+<br>© ENSAE Dakar  
+<br><span style="font-weight:600;">Réalisé avec R Bookdown</span>
+</div>
+
+</div>
+</footer>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="ii.-analyse-descriptive-des-variables-détude.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/02-theorie.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

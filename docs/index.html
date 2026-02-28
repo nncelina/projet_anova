@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>TP d’ANOVA</title>
+  <meta name="description" content="TP d’ANOVA" />
+  <meta name="generator" content="bookdown 0.43 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="TP d’ANOVA" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="TP d’ANOVA" />
+  
+  
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="introduction.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link href="libs/bsTable-3.3.7/bootstrapTable.min.css" rel="stylesheet" />
+<script src="libs/bsTable-3.3.7/bootstrapTable.js"></script>
+<link rel="shortcut icon" href="images/bookdown.ico" type="image/x-icon">
+
+
+<style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li style="text-align:center;">
+  <img src="images/cheap.png" style="max-width:200px; width:100%; height:auto; display:inline-block; margin-bottom:0.35em;">
+</li>
+<li><a href="index.html">ANOVA à mesure répétée</a></li>
+
+<li class="divider"></li>
+<li><a href="index.html#section" id="toc-section"></a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i>Introduction</a></li>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html"><i class="fa fa-check"></i>I. Théorie sur l’ANOVA à mesure répétée</a>
+<ul>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html#notations"><i class="fa fa-check"></i>1. Notations</a></li>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html#tests-spécifiques-à-lanova-à-mesures-répétées"><i class="fa fa-check"></i>2. Tests spécifiques à l’ANOVA à mesures répétées</a></li>
+<li class="chapter" data-level="" data-path="i.-théorie-sur-lanova-à-mesure-répétée.html"><a href="i.-théorie-sur-lanova-à-mesure-répétée.html#modélisation-et-tests-en-anova-à-mesures-répétées"><i class="fa fa-check"></i>3. Modélisation et tests en ANOVA à mesures répétées</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html"><i class="fa fa-check"></i>II. Analyse descriptive des variables d’étude</a>
+<ul>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#description-de-la-base-de-données"><i class="fa fa-check"></i>1. Description de la base de données</a></li>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-univariée"><i class="fa fa-check"></i>2. Analyse univariée</a></li>
+<li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-bivariée"><i class="fa fa-check"></i>3. Analyse bivariée</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html"><i class="fa fa-check"></i>IV. Pratique</a>
+<ul>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#tests-dhypothèses-de-lanova"><i class="fa fa-check"></i>1. Tests d’hypothèses de l’ANOVA</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-un-facteur"><i class="fa fa-check"></i>2. ANOVA à un facteur</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-sans-interaction"><i class="fa fa-check"></i>3. ANOVA à deux facteurs sans interaction</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-avec-interaction"><i class="fa fa-check"></i>4. ANOVA à deux facteurs avec interaction</a></li>
+<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#modèle-final"><i class="fa fa-check"></i>5. Modèle final</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Publié avec bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">TP d’ANOVA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">TP d’ANOVA</h1>
+</div>
+<div id="section" class="section level1 unnumbered">
+<h1 class="unnumbered"></h1>
+<style>
+/* 1. RESET & FOND GLOBAL */
+.book .book-body, .book .book-body .page-wrapper .page-inner {
+    background-color: #f8fafc !important; /* Gris très clair "Premium" */
+}
+
+/* On cache le titre automatique généré par Bookdown */
+h1 { display: none; } 
+
+/* 2. LOGOS */
+.header-logos {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px auto 40px auto;
+    max-width: 900px;
+}
+
+.logo-item img {
+    height: 70px;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.05));
+    transition: transform 0.3s ease;
+}
+
+.logo-item img:hover { transform: translateY(-5px); }
+
+/* 3. CARTE PRINCIPALE */
+.main-cover-card {
+    background: #ffffff;
+    border-radius: 32px;
+    padding: 60px 50px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.04), 0 1px 3px rgba(0,0,0,0.02);
+    border: 1px solid rgba(226, 232, 240, 0.8);
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto 50px auto;
+    position: relative;
+}
+
+.badge-pill {
+    display: inline-block;
+    padding: 8px 10px;
+    background: linear-gradient(135deg, #ffedd5 0%, #fed7aa 100%);
+    color: #9a3412;
+    border-radius: 99px;
+    font-size: 0.75em;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    border: 1px solid #fdba74;
+}
+
+
+.main-title {
+    display: block !important;
+    font-size: 2em !important;
+    font-weight: 800 !important;
+    color: #0f172a !important;
+    letter-spacing: -1.5px !important;
+    line-height: 1.1 !important;
+    margin-bottom: 15px !important;
+    border: none !important;
+}
+
+.sub-title {
+    font-size: 1.2em;
+    color: #64748b;
+    font-weight: 400;
+    margin-bottom: 40px;
+}
+
+/* 4. GRILLE DES INFOS */
+.cover-grid {
+    display: flex;
+    gap: 24px;
+    text-align: left;
+}
+
+.cover-box {
+    flex: 1;
+    background: #fdfdfd;
+    padding: 30px;
+    border-radius: 24px;
+    border: 1px solid #f1f5f9;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.01);
+}
+
+.cover-kicker {
+    font-size: 0.65em;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #f97316;
+    font-weight: 800;
+    margin-bottom: 15px;
+}
+
+.cover-names {
+    font-size: 0.85em;
+    font-weight: 600;
+    color: #1e293b;
+    line-height: 1.7;
+}
+.cover-supervisor {
+    font-size: 1.1em;
+    font-weight: 800;
+    color: #0f172a;
+    text-align: left;
+}
+
+
+.supervisor-name {
+    font-size: 1em;
+    font-weight: 800;
+    color: #0f172a;
+}
+
+.cover-note {
+    font-size: 0.8em;
+    color: #94a3b8;
+    margin-top: 10px;
+    display: inline-block;
+}
+
+.context-tag {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background: #f8fafc;
+    border-radius: 12px;
+    border-left: 4px solid #2D7FF9;
+    font-size: 0.8em;
+    color: #475569;
+}
+
+.header-logos {
+    display: flex;
+    align-items: flex-start;
+}
+
+.logo-item:first-child {
+    margin-right: auto;
+}
+
+.logo-item:last-child {
+    margin-left: auto;
+}
+
+</style>
+<div class="header-logos">
+<div class="logo-item">
+<img src="images/LOGO2.jpg">
+<div style="font-size:0.75em; font-weight:600; color:#4b5563;">
+Agence Nationale de la Statistique et de la Démographie (ANSD)
+</div>
+</div>
+<div class="logo-item">
+<img src="images/LOGO1.jpg">
+<div style="font-size:0.75em; font-weight:600; color:#4b5563;">
+École Nationale de la Statistique et de l’Analyse Économique (ENSAE)
+</div>
+</div>
+</div>
+<div class="main-cover-card">
+<div class="badge-pill">
+PRÉSENTATION DU PROJET – ANNÉE ACADÉMIQUE 2025-2026
+</div>
+<h1 class="main-title">
+ANOVA à mesure répétée
+</h1>
+<div style="color:#9a3412; font-size:1.1em; margin-bottom:20px;">
+Travaux pratiques
+</div>
+<div style="height:3px; width:60px; background:#f97316; margin:0 auto;">
+
+</div>
+<p><br></p>
+<div class="cover-grid">
+<div class="cover-box">
+<div class="cover-kicker">
+Rédigé par
+</div>
+<div class="cover-names">
+<p>Célina NGUEMFOUO NGOUMTSA<br/>
+Mame Balla BOUSSO</p>
+</div>
+<div class="cover-note">
+Élèves Ingénieurs Statisticiens Economistes (ISE 2)
+</div>
+</div>
+<div class="cover-box">
+<div class="cover-kicker">
+Sous la supervision de
+</div>
+<div class="cover-supervisor">
+M. Carlos AKAKPOVI
+</div>
+<div class="cover-note">
+Ingénieur Statisticien Economiste
+</div>
+</div>
+</div>
+<div style="margin-top:30px; font-size:0.75em; color:#9ca3af;">
+<p>Document généré via R Bookdown.</p>
+</div>
+</div>
+
+</div>
+<div class="full-width-wrapper">
+<footer style="margin-top: 5em; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;">
+
+<!-- Ligne décorative -->
+<div style="height: 4px; background: linear-gradient(90deg, #fdba74 0%, #f97316 50%, #fdba74 100%);"></div>
+
+<div style="background: linear-gradient(180deg, #fff7ed 0%, #ffedd5 100%); 
+            color: #7c2d12; 
+            padding: 45px 0 25px 0;
+            border-top: 1px solid rgba(0,0,0,0.05);">
+
+<div style="max-width: 1100px; margin: 0 auto; padding: 0 20px; display: flex; flex-wrap: wrap; gap: 40px; justify-content: space-between;">
+
+<!-- Bloc gauche -->
+<div style="flex: 1; min-width: 300px;">
+<div style="display: flex; align-items: center; gap: 14px; margin-bottom: 18px;">
+
+<div style="width: 42px; height: 42px; border-radius: 14px;
+            background: rgba(249,115,22,0.15);
+            border: 1px solid rgba(249,115,22,0.35);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 6px 20px rgba(249,115,22,0.25);">
+️🧮
+</div>
+
+<div>
+<h4 style="margin: 0; font-size: 1.15em; font-weight: 800; color: #7c2d12;">
+ANOVA à mesure répétée
+</h4>
+<p style="margin: 0; font-size: 0.85em; color: #f97316; font-weight: 700;">
+ANOVA — Projet académique
+</p>
+</div>
+</div>
+
+<!-- Citation -->
+<div style="padding-left: 14px; border-left: 3px solid #f97316;
+            font-style: italic; font-size: 0.85em; 
+            color: #92400e;">
+« L’analyse de la variance n’est pas un théorème mathématique, mais plutôt une manière commode d’organiser les calculs. »
+<br>
+<span style="font-weight: 700; color: #7c2d12;">— Ronald A. Fisher</span>
+</div>
+
+</div>
+</div>
+
+<!-- Bas du footer -->
+<div style="max-width: 1100px; margin: 30px auto 0 auto;
+            padding: 20px 20px 0 20px;
+            border-top: 1px solid rgba(0,0,0,0.08);
+            text-align: center;
+            font-size: 0.7em;
+            color: #9a3412;
+            letter-spacing: 1px;">
+Promotion ISE2 2025–2026  
+<br>© ENSAE Dakar  
+<br><span style="font-weight:600;">Réalisé avec R Bookdown</span>
+</div>
+
+</div>
+</footer>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/rstudio/bookdown-demo/edit/master/index.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
