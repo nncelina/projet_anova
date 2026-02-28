@@ -160,13 +160,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-univariée"><i class="fa fa-check"></i>2. Analyse univariée</a></li>
 <li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-bivariée"><i class="fa fa-check"></i>3. Analyse bivariée</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html"><i class="fa fa-check"></i>IV. Pratique</a>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html"><i class="fa fa-check"></i>III. Pratique</a>
 <ul>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#tests-dhypothèses-de-lanova"><i class="fa fa-check"></i>1. Tests d’hypothèses de l’ANOVA</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-un-facteur"><i class="fa fa-check"></i>2. ANOVA à un facteur</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-sans-interaction"><i class="fa fa-check"></i>3. ANOVA à deux facteurs sans interaction</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-avec-interaction"><i class="fa fa-check"></i>4. ANOVA à deux facteurs avec interaction</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#modèle-final"><i class="fa fa-check"></i>5. Modèle final</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#tests-dhypothèses-de-lanova"><i class="fa fa-check"></i>1. Tests d’hypothèses de l’ANOVA</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#anova-à-un-facteur"><i class="fa fa-check"></i>2. ANOVA à un facteur</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#anova-à-deux-facteurs-sans-interaction"><i class="fa fa-check"></i>3. ANOVA à deux facteurs sans interaction</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#anova-à-deux-facteurs-avec-interaction"><i class="fa fa-check"></i>4. ANOVA à deux facteurs avec interaction</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#modèle-final"><i class="fa fa-check"></i>5. Modèle final</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
 <li class="divider"></li>
@@ -191,20 +191,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="introduction" class="section level1 unnumbered hasAnchor">
 <h1>Introduction<a href="introduction.html#introduction" class="anchor-section" aria-label="Anchor link to header"></a></h1>
-<p>L’Analyse de la Variance (ANOVA) constitue un outil fondamental
-en statistique pour étudier l’influence d’un ou plusieurs facteurs
-sur une variable quantitative. Elle permet de déterminer si les différences
-observées entre plusieurs groupes sont statistiquement significatives
-ou simplement dues au hasard.</p>
-<p>Dans certaines situations expérimentales, les mesures ne sont pas
-indépendantes, notamment lorsque plusieurs observations sont réalisées
-dans un même cadre expérimental ou sur des unités similaires.
-L’ANOVA permet alors d’analyser simultanément les effets principaux
-des facteurs étudiés ainsi que leurs interactions éventuelles.</p>
-<p>Le présent travail a pour objectif de présenter les fondements
-théoriques de l’ANOVA, puis d’appliquer ces outils à une base
-de données expérimentales réelles afin d’identifier les facteurs
-susceptibles d’influencer la croissance des plantes.</p>
+<p style="display: block; font-size: 2.25rem; font-weight: 700; color: black; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 24px; margin-bottom: 16px; line-height: 1.25;">
+Introduction
+</p>
+<p>L’Analyse de la Variance (ANOVA) constitue un outil fondamental en statistique pour étudier l’influence d’un ou plusieurs facteurs sur une variable quantitative. Elle permet de déterminer si les différences observées entre plusieurs groupes sont statistiquement significatives ou simplement dues au hasard.</p>
+<p>Dans certaines situations expérimentales, les mesures ne sont pas indépendantes, notamment lorsque plusieurs observations sont réalisées dans un même cadre expérimental ou sur des unités similaires. L’ANOVA permet alors d’analyser simultanément les effets principaux des facteurs étudiés ainsi que leurs interactions éventuelles.</p>
+<p>Le présent travail a pour objectif de présenter les fondements théoriques de l’ANOVA, puis d’appliquer ces outils à une base de données expérimentales réelles afin d’identifier les facteurs susceptibles d’influencer la croissance des plantes.</p>
 <p>La base mise à disposition porte sur des données réelles
 recueillies dans le cadre d’une expérimentation agronomique.</p>
 <p>Trois types de terreau ont été étudiés :</p>
@@ -218,11 +210,9 @@ recueillies dans le cadre d’une expérimentation agronomique.</p>
 <li><p>Variété 1 (Var1),</p></li>
 <li><p>Variété 2 (Var2).</p></li>
 </ul>
-<p>L’expérience a été répétée quatre fois et, pour chaque combinaison
-terreau–variété, la hauteur des plantes a été mesurée.</p>
+<p>L’expérience a été répétée quatre fois et, pour chaque combinaison terreau–variété, la hauteur des plantes a été mesurée.</p>
 <p>L’objectif principal de l’étude est de déterminer s’il existe
-une association entre le type de terreau et le type de variété
-qui favorise significativement la croissance des plantes.</p>
+une association entre le type de terreau et le type de variété qui favorise significativement la croissance des plantes.</p>
 <p>Le présent travail s’articule autour de trois parties principales :</p>
 <ul>
 <li><p>Une première partie consacrée à la présentation synthétique des fondements théoriques de l’Analyse de la Variance ;</p></li>

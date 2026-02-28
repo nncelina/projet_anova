@@ -1,21 +1,14 @@
 # Introduction {-}
 
-L’Analyse de la Variance (ANOVA) constitue un outil fondamental
-en statistique pour étudier l’influence d’un ou plusieurs facteurs
-sur une variable quantitative. Elle permet de déterminer si les différences
-observées entre plusieurs groupes sont statistiquement significatives
-ou simplement dues au hasard.
+<p style="display: block; font-size: 2.25rem; font-weight: 700; color: black; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 24px; margin-bottom: 16px; line-height: 1.25;">
+  Introduction
+</p>
 
-Dans certaines situations expérimentales, les mesures ne sont pas
-indépendantes, notamment lorsque plusieurs observations sont réalisées
-dans un même cadre expérimental ou sur des unités similaires.
-L’ANOVA permet alors d’analyser simultanément les effets principaux
-des facteurs étudiés ainsi que leurs interactions éventuelles.
+L’Analyse de la Variance (ANOVA) constitue un outil fondamental en statistique pour étudier l’influence d’un ou plusieurs facteurs sur une variable quantitative. Elle permet de déterminer si les différences observées entre plusieurs groupes sont statistiquement significatives ou simplement dues au hasard.
 
-Le présent travail a pour objectif de présenter les fondements
-théoriques de l’ANOVA, puis d’appliquer ces outils à une base
-de données expérimentales réelles afin d’identifier les facteurs
-susceptibles d’influencer la croissance des plantes.
+Dans certaines situations expérimentales, les mesures ne sont pas indépendantes, notamment lorsque plusieurs observations sont réalisées dans un même cadre expérimental ou sur des unités similaires. L’ANOVA permet alors d’analyser simultanément les effets principaux des facteurs étudiés ainsi que leurs interactions éventuelles.
+
+Le présent travail a pour objectif de présenter les fondements théoriques de l’ANOVA, puis d’appliquer ces outils à une base de données expérimentales réelles afin d’identifier les facteurs susceptibles d’influencer la croissance des plantes.
 
 La base mise à disposition porte sur des données réelles
 recueillies dans le cadre d’une expérimentation agronomique.
@@ -34,12 +27,10 @@ Ces terreaux ont été utilisés sur deux variétés de plantes :
 
 * Variété 2 (Var2).
 
-L’expérience a été répétée quatre fois et, pour chaque combinaison
-terreau–variété, la hauteur des plantes a été mesurée.
+L’expérience a été répétée quatre fois et, pour chaque combinaison terreau–variété, la hauteur des plantes a été mesurée.
 
 L’objectif principal de l’étude est de déterminer s’il existe
-une association entre le type de terreau et le type de variété
-qui favorise significativement la croissance des plantes.
+une association entre le type de terreau et le type de variété qui favorise significativement la croissance des plantes.
 
 Le présent travail s’articule autour de trois parties principales :
 

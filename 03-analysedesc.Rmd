@@ -1,10 +1,14 @@
 # II. Analyse descriptive des variables d'étude {-}
 
+<p style="display: block; font-size: 2.25rem; font-weight: 700; color: black; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 24px; margin-bottom: 16px; line-height: 1.25;">
+  Analyse descriptive des variables d'étude
+</p>
+
 La base utilisée porte sur des données réelles recueillies dans le cadre d’une expérimentation.Dans le cadre de cette expérimentation, trois types de terreau : Manguier (Ma), Caïlcédrat (Ca) et Anacarde (An) ont été utilisées sur deux types de variétés de plantes (Var1 et Var2). L’expérience a été répété quatre fois et chaque fois on mesure la hauteur des plantes.
 
 Voici un aperçu de la base :
 
-```{r}
+```{r, echo=FALSE}
 head(data)
 ```
 
@@ -185,6 +189,6 @@ ggplot(data, aes(x = variété, y = Hauteur)) +
   theme_minimal()
 ```
 
-ID'après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.
+D'après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.
 
 Toutes ces observations vont être testées de façon plus rigoureuses par l'ANOVA à mesure répétées.

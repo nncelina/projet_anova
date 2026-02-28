@@ -1,5 +1,8 @@
 # I. Théorie sur l'ANOVA à mesure répétée {-}
 
+<p style="display: block; font-size: 2.25rem; font-weight: 700; color: black; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 24px; margin-bottom: 16px; line-height: 1.25;">
+  Théorie sur l'ANOVA à mesure répétée
+</p>
 
 L’Analyse de la Variance à Mesures Répétées (ANOVA-MR) est une extension de l’ANOVA classique adaptée aux situations où **les mêmes individus sont mesurés plusieurs fois**, au cours du temps ou sous différentes conditions expérimentales.
 

@@ -173,22 +173,13 @@ Document généré via R Bookdown.
 \chapter*{Introduction}\label{introduction}
 \addcontentsline{toc}{chapter}{Introduction}
 
-L'Analyse de la Variance (ANOVA) constitue un outil fondamental
-en statistique pour étudier l'influence d'un ou plusieurs facteurs
-sur une variable quantitative. Elle permet de déterminer si les différences
-observées entre plusieurs groupes sont statistiquement significatives
-ou simplement dues au hasard.
+Introduction
 
-Dans certaines situations expérimentales, les mesures ne sont pas
-indépendantes, notamment lorsque plusieurs observations sont réalisées
-dans un même cadre expérimental ou sur des unités similaires.
-L'ANOVA permet alors d'analyser simultanément les effets principaux
-des facteurs étudiés ainsi que leurs interactions éventuelles.
+L'Analyse de la Variance (ANOVA) constitue un outil fondamental en statistique pour étudier l'influence d'un ou plusieurs facteurs sur une variable quantitative. Elle permet de déterminer si les différences observées entre plusieurs groupes sont statistiquement significatives ou simplement dues au hasard.
 
-Le présent travail a pour objectif de présenter les fondements
-théoriques de l'ANOVA, puis d'appliquer ces outils à une base
-de données expérimentales réelles afin d'identifier les facteurs
-susceptibles d'influencer la croissance des plantes.
+Dans certaines situations expérimentales, les mesures ne sont pas indépendantes, notamment lorsque plusieurs observations sont réalisées dans un même cadre expérimental ou sur des unités similaires. L'ANOVA permet alors d'analyser simultanément les effets principaux des facteurs étudiés ainsi que leurs interactions éventuelles.
+
+Le présent travail a pour objectif de présenter les fondements théoriques de l'ANOVA, puis d'appliquer ces outils à une base de données expérimentales réelles afin d'identifier les facteurs susceptibles d'influencer la croissance des plantes.
 
 La base mise à disposition porte sur des données réelles
 recueillies dans le cadre d'une expérimentation agronomique.
@@ -213,12 +204,10 @@ Ces terreaux ont été utilisés sur deux variétés de plantes :
   Variété 2 (Var2).
 \end{itemize}
 
-L'expérience a été répétée quatre fois et, pour chaque combinaison
-terreau--variété, la hauteur des plantes a été mesurée.
+L'expérience a été répétée quatre fois et, pour chaque combinaison terreau--variété, la hauteur des plantes a été mesurée.
 
 L'objectif principal de l'étude est de déterminer s'il existe
-une association entre le type de terreau et le type de variété
-qui favorise significativement la croissance des plantes.
+une association entre le type de terreau et le type de variété qui favorise significativement la croissance des plantes.
 
 Le présent travail s'articule autour de trois parties principales :
 
@@ -233,6 +222,8 @@ Le présent travail s'articule autour de trois parties principales :
 
 \chapter*{I. Théorie sur l'ANOVA à mesure répétée}\label{i.-thuxe9orie-sur-lanova-uxe0-mesure-ruxe9puxe9tuxe9e}
 \addcontentsline{toc}{chapter}{I. Théorie sur l'ANOVA à mesure répétée}
+
+Théorie sur l'ANOVA à mesure répétée
 
 L'Analyse de la Variance à Mesures Répétées (ANOVA-MR) est une extension de l'ANOVA classique adaptée aux situations où \textbf{les mêmes individus sont mesurés plusieurs fois}, au cours du temps ou sous différentes conditions expérimentales.
 
@@ -849,15 +840,11 @@ issues de l'expérimentation relative aux types de terreau et aux variétés de 
 \chapter*{II. Analyse descriptive des variables d'étude}\label{ii.-analyse-descriptive-des-variables-duxe9tude}
 \addcontentsline{toc}{chapter}{II. Analyse descriptive des variables d'étude}
 
+Analyse descriptive des variables d'étude
+
 La base utilisée porte sur des données réelles recueillies dans le cadre d'une expérimentation.Dans le cadre de cette expérimentation, trois types de terreau : Manguier (Ma), Caïlcédrat (Ca) et Anacarde (An) ont été utilisées sur deux types de variétés de plantes (Var1 et Var2). L'expérience a été répété quatre fois et chaque fois on mesure la hauteur des plantes.
 
 Voici un aperçu de la base :
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\FunctionTok{head}\NormalTok{(data)}
-\end{Highlighting}
-\end{Shaded}
 
 \begin{verbatim}
 # A tibble: 6 x 5
@@ -1051,12 +1038,14 @@ La figure suivante présente les boxplots de la variable hauteur selon les modal
 
 \includegraphics{_main_files/figure-latex/unnamed-chunk-13-1.pdf}
 
-ID'après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.
+D'après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.
 
 Toutes ces observations vont être testées de façon plus rigoureuses par l'ANOVA à mesure répétées.
 
-\chapter*{IV. Pratique}\label{iv.-pratique}
-\addcontentsline{toc}{chapter}{IV. Pratique}
+\chapter*{III. Pratique}\label{iii.-pratique}
+\addcontentsline{toc}{chapter}{III. Pratique}
+
+Pratique
 
 \section*{1. Tests d'hypothèses de l'ANOVA}\label{tests-dhypothuxe8ses-de-lanova}
 \addcontentsline{toc}{section}{1. Tests d'hypothèses de l'ANOVA}
@@ -1321,14 +1310,18 @@ L'analyse montre que :
 
 Après analyse, le modèle à deux facteurs avec interaction a montré que l'interaction entre le type de terreau et la variété n'était pas significative (p = 0,988). Les effets principaux de Terreau et de Variété sont en revanche significatifs. Pour simplifier l'interprétation et respecter le principe de parcimonie, nous retenons donc le modèle final sans interaction :
 
-hauteur \(\sim\) Terreau \(+\) Variété \(+\) Error(Sujet/Répétition)
+\[
+\text{Hauteur } \sim \text{ Terreau } + \text{ Variété } + \text{ Error(Sujet/Répétition) }
+\]
 
 Ce modèle permet de mettre en évidence l'effet indépendant du type de terreau et de la variété sur la croissance des plantes, tout en conservant la structure des mesures répétées.
 
 \chapter*{Conclusion}\label{conclusion}
 \addcontentsline{toc}{chapter}{Conclusion}
 
-Dans cet exposé, nous avons étudié l'effet du type de terreau et de la variété sur la croissance des plantes en utilisant des ANOVA à mesures répétées. Avant d'effectuer les analyses, nous avons vérifié les hypothèses fondamentales du modèle. L'indépendance des sujets a été respectée, chaque plante constituant une unité expérimentale distincte. La normalité des résidus, hypothèse clé pour la validité de l'ANOVA, a été prise en compte même si la distribution brute de la variable hauteur ne suivait pas parfaitement une loi normale. L'homogénéité des variances entre les groupes inter-sujets a été confirmée par le test de Levene.
+Conclusion
+
+Dans cet exposé, nous avons étudié l'effet du type de terreau et de la variété sur la croissance des plantes en utilisant des ANOVA à mesures répétées. Avant d'effectuer les analyses, nous avons vérifié les hypothèses fondamentales du modèle. L'indépendance des sujets a été respectée, chaque plante constituant une unité expérimentale distincte. La normalité des résidus, hypothèse clé pour la validité de l'ANOVA, a été prise en compte et l'homogénéité des variances entre les groupes inter-sujets a été confirmée par le test de Levene.
 
 Les résultats des analyses montrent que, lorsqu'on considère chaque facteur séparément, le type de terreau et la variété ont tous deux un effet significatif sur la hauteur des plantes à travers les répétitions. Les modèles à deux facteurs ont permis de confirmer ces effets principaux, tandis que l'interaction entre le type de terreau et la variété n'était pas significative, ce qui indique que l'influence du terreau est similaire pour toutes les variétés et que l'effet de la variété est indépendant du type de terreau. Sur cette base, le modèle final retenu est l'ANOVA à deux facteurs sans interaction, qui met en évidence les effets indépendants du type de terreau et de la variété tout en conservant la structure des mesures répétées.
 

@@ -1,6 +1,10 @@
 # Conclusion {-}
 
-Dans cet exposé, nous avons étudié l’effet du type de terreau et de la variété sur la croissance des plantes en utilisant des ANOVA à mesures répétées. Avant d’effectuer les analyses, nous avons vérifié les hypothèses fondamentales du modèle. L’indépendance des sujets a été respectée, chaque plante constituant une unité expérimentale distincte. La normalité des résidus, hypothèse clé pour la validité de l’ANOVA, a été prise en compte même si la distribution brute de la variable hauteur ne suivait pas parfaitement une loi normale. L’homogénéité des variances entre les groupes inter-sujets a été confirmée par le test de Levene.
+<p style="display: block; font-size: 2.25rem; font-weight: 700; color: black; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 24px; margin-bottom: 16px; line-height: 1.25;">
+  Conclusion
+</p>
+
+Dans cet exposé, nous avons étudié l’effet du type de terreau et de la variété sur la croissance des plantes en utilisant des ANOVA à mesures répétées. Avant d’effectuer les analyses, nous avons vérifié les hypothèses fondamentales du modèle. L’indépendance des sujets a été respectée, chaque plante constituant une unité expérimentale distincte. La normalité des résidus, hypothèse clé pour la validité de l’ANOVA, a été prise en compte et l'homogénéité des variances entre les groupes inter-sujets a été confirmée par le test de Levene.
 
 Les résultats des analyses montrent que, lorsqu’on considère chaque facteur séparément, le type de terreau et la variété ont tous deux un effet significatif sur la hauteur des plantes à travers les répétitions. Les modèles à deux facteurs ont permis de confirmer ces effets principaux, tandis que l’interaction entre le type de terreau et la variété n’était pas significative, ce qui indique que l’influence du terreau est similaire pour toutes les variétés et que l’effet de la variété est indépendant du type de terreau. Sur cette base, le modèle final retenu est l’ANOVA à deux facteurs sans interaction, qui met en évidence les effets indépendants du type de terreau et de la variété tout en conservant la structure des mesures répétées.
 

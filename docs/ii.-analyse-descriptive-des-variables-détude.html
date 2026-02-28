@@ -29,7 +29,7 @@
   
   
 <link rel="prev" href="i.-théorie-sur-lanova-à-mesure-répétée.html"/>
-<link rel="next" href="iv.-pratique.html"/>
+<link rel="next" href="iii.-pratique.html"/>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -160,13 +160,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-univariée"><i class="fa fa-check"></i>2. Analyse univariée</a></li>
 <li class="chapter" data-level="" data-path="ii.-analyse-descriptive-des-variables-détude.html"><a href="ii.-analyse-descriptive-des-variables-détude.html#analyse-bivariée"><i class="fa fa-check"></i>3. Analyse bivariée</a></li>
 </ul></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html"><i class="fa fa-check"></i>IV. Pratique</a>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html"><i class="fa fa-check"></i>III. Pratique</a>
 <ul>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#tests-dhypothèses-de-lanova"><i class="fa fa-check"></i>1. Tests d’hypothèses de l’ANOVA</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-un-facteur"><i class="fa fa-check"></i>2. ANOVA à un facteur</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-sans-interaction"><i class="fa fa-check"></i>3. ANOVA à deux facteurs sans interaction</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#anova-à-deux-facteurs-avec-interaction"><i class="fa fa-check"></i>4. ANOVA à deux facteurs avec interaction</a></li>
-<li class="chapter" data-level="" data-path="iv.-pratique.html"><a href="iv.-pratique.html#modèle-final"><i class="fa fa-check"></i>5. Modèle final</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#tests-dhypothèses-de-lanova"><i class="fa fa-check"></i>1. Tests d’hypothèses de l’ANOVA</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#anova-à-un-facteur"><i class="fa fa-check"></i>2. ANOVA à un facteur</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#anova-à-deux-facteurs-sans-interaction"><i class="fa fa-check"></i>3. ANOVA à deux facteurs sans interaction</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#anova-à-deux-facteurs-avec-interaction"><i class="fa fa-check"></i>4. ANOVA à deux facteurs avec interaction</a></li>
+<li class="chapter" data-level="" data-path="iii.-pratique.html"><a href="iii.-pratique.html#modèle-final"><i class="fa fa-check"></i>5. Modèle final</a></li>
 </ul></li>
 <li class="chapter" data-level="" data-path="conclusion.html"><a href="conclusion.html"><i class="fa fa-check"></i>Conclusion</a></li>
 <li class="divider"></li>
@@ -191,9 +191,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="ii.-analyse-descriptive-des-variables-détude" class="section level1 unnumbered hasAnchor">
 <h1>II. Analyse descriptive des variables d’étude<a href="ii.-analyse-descriptive-des-variables-détude.html#ii.-analyse-descriptive-des-variables-détude" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p style="display: block; font-size: 2.25rem; font-weight: 700; color: black; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 24px; margin-bottom: 16px; line-height: 1.25;">
+Analyse descriptive des variables d’étude
+</p>
 <p>La base utilisée porte sur des données réelles recueillies dans le cadre d’une expérimentation.Dans le cadre de cette expérimentation, trois types de terreau : Manguier (Ma), Caïlcédrat (Ca) et Anacarde (An) ont été utilisées sur deux types de variétés de plantes (Var1 et Var2). L’expérience a été répété quatre fois et chaque fois on mesure la hauteur des plantes.</p>
 <p>Voici un aperçu de la base :</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb1-1" tabindex="-1"></a><span class="fu">head</span>(data)</span></code></pre></div>
 <pre><code># A tibble: 6 × 5
   Sujet Répétition Terreau variété Hauteur
   &lt;dbl&gt; &lt;fct&gt;      &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;
@@ -266,9 +268,9 @@ T4
 <h3>Valeurs abberantes<a href="ii.-analyse-descriptive-des-variables-détude.html#valeurs-abberantes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Les données analysées proviennent d’une expérimentation agronomique contrôlée. Les hauteurs observées correspondent à des mesures physiques réelles et non à des déclarations ou des données administratives. Ainsi, les valeurs extrêmes potentielles reflètent davantage la variabilité biologique naturelle que des anomalies statistiques.</p>
 <p>Une inspection graphique par boîtes à moustaches, réalisée par répétition expérimentale, ne met pas en évidence de valeurs aberrantes isolées susceptibles d’indiquer une erreur de mesure ou de saisie. Les éventuelles valeurs extrêmes observées sont cohérentes avec la dispersion attendue dans un contexte biologique réel et ont donc été conservées dans l’analyse.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb4-1" tabindex="-1"></a><span class="fu">boxplot</span>(Hauteur <span class="sc">~</span> Répétition, <span class="at">data =</span> data,</span>
-<span id="cb4-2"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb4-2" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Distribution des hauteurs par répétition&quot;</span>,</span>
-<span id="cb4-3"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb4-3" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Hauteur&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb3-1" tabindex="-1"></a><span class="fu">boxplot</span>(Hauteur <span class="sc">~</span> Répétition, <span class="at">data =</span> data,</span>
+<span id="cb3-2"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb3-2" tabindex="-1"></a>        <span class="at">main =</span> <span class="st">&quot;Distribution des hauteurs par répétition&quot;</span>,</span>
+<span id="cb3-3"><a href="ii.-analyse-descriptive-des-variables-détude.html#cb3-3" tabindex="-1"></a>        <span class="at">ylab =</span> <span class="st">&quot;Hauteur&quot;</span>)</span></code></pre></div>
 <p><img src="_main_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 </div>
 </div>
@@ -604,7 +606,7 @@ T4
 <h3>Variable variété et hauteur<a href="ii.-analyse-descriptive-des-variables-détude.html#variable-variété-et-hauteur" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>La figure suivante présente les boxplots de la variable hauteur selon les modalités de la variable variété et suivant les périodes.</p>
 <p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
-<p>ID’après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.</p>
+<p>D’après ce graphique, de manière générale, le type de variété semé semble influencer la hauteur des plantes. On constate par exemple que dans les périodes 1 et 3, les hauteurs des plantes de la variété 2 semblent inférieures à celle des plantes de la variété 1.</p>
 <p>Toutes ces observations vont être testées de façon plus rigoureuses par l’ANOVA à mesure répétées.</p>
 
 </div>
@@ -679,7 +681,7 @@ Promotion ISE2 2025–2026
         </div>
       </div>
 <a href="i.-théorie-sur-lanova-à-mesure-répétée.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="iv.-pratique.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="iii.-pratique.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
